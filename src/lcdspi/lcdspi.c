@@ -19,12 +19,12 @@ static int gui_fcolour;
 static int gui_bcolour;
 static short current_x = 0, current_y = 0; // the current default position for the next char to be written
 static short gui_font_width, gui_font_height;
-static short hres = 320; // Horizontal resolution for ILI9488
+static short hres = 480; // Horizontal resolution for ILI9488
 static short vres = 320; // Vertical resolution for ILI9488
 static char s_height;
 static char s_width;
 int lcd_char_pos = 0;
-unsigned char lcd_buffer[320 * 3] = {0};// 1440 = 480*3, 320*3 = 960
+unsigned char lcd_buffer[480 * 3] = {0};// 1440 = 480*3, 320*3 = 960
 
 void __not_in_flash_func(spi_write_fast)(spi_inst_t *spi, const uint8_t *src, size_t len) {
     // Write to TX FIFO whilst ignoring RX, then clean up afterward. When RX
@@ -570,9 +570,10 @@ void pico_lcd_init() {
 #ifdef ILI9488
     reset_controller();
 
-    hres = 320;
+    hres = 480;
     vres = 320;
 
+    spi_write_command(0x28);
     spi_write_command(0xE0); // Positive Gamma Control
     spi_write_data(0x00);
     spi_write_data(0x03);
@@ -620,7 +621,8 @@ void pico_lcd_init() {
     spi_write_data(0x80);
 
     spi_write_command(TFT_MADCTL); // Memory Access Control
-    spi_write_data(0x48); // MX, BGR
+    //spi_write_data(0x48); // MX, BGR Portrait
+    /spi_write_data(0x28); // MX, BGR Landscape
 
     spi_write_command(0x3A); // Pixel Interface Format
     spi_write_data(0x66); // 18/24-bit colour for SPI (RGB666/RGB888)
@@ -631,7 +633,7 @@ void pico_lcd_init() {
     spi_write_command(0xB1); // Frame Rate Control
     spi_write_data(0xA0);
 
-    spi_write_command(TFT_INVON);
+    //spi_write_command(TFT_INVON);
 
     spi_write_command(0xB4); // Display Inversion Control
     spi_write_data(0x02);
@@ -643,8 +645,8 @@ void pico_lcd_init() {
 
     spi_write_command(0xB7); // Entry Mode Set
     spi_write_data(0xC6);
-    spi_write_command(0xE9);
-    spi_write_data(0x00);
+    //spi_write_command(0xE9);
+    //spi_write_data(0x00);
 
     spi_write_command(0xF7); // Adjust Control 3
     spi_write_data(0xA9);
