@@ -617,12 +617,15 @@ void pico_lcd_init() {
 
     spi_write_command(0xC5); // VCOM Control
     spi_write_data(0x00);
-    spi_write_data(0x12);
+    spi_write_data(0x4D);
     spi_write_data(0x80);
 
-    spi_write_command(TFT_MADCTL); // Memory Access Control
+    spi_write_command(0x36);
+    spi_write_data(0xE0);
+    
+    //spi_write_command(TFT_MADCTL); // Memory Access Control
     //spi_write_data(0x48); // MX, BGR Portrait
-    /spi_write_data(0x28); // MX, BGR Landscape
+    //spi_write_data(0x28); // MX, BGR Landscape
 
     spi_write_command(0x3A); // Pixel Interface Format
     spi_write_data(0x66); // 18/24-bit colour for SPI (RGB666/RGB888)
@@ -632,11 +635,6 @@ void pico_lcd_init() {
 
     spi_write_command(0xB1); // Frame Rate Control
     spi_write_data(0xA0);
-
-    //spi_write_command(TFT_INVON);
-
-    spi_write_command(0xB4); // Display Inversion Control
-    spi_write_data(0x02);
 
     spi_write_command(0xB6); // Display Function Control
     spi_write_data(0x02);
