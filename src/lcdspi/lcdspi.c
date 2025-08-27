@@ -19,8 +19,8 @@ static int gui_fcolour;
 static int gui_bcolour;
 static short current_x = 0, current_y = 0; // the current default position for the next char to be written
 static short gui_font_width, gui_font_height;
-static short hres = 480; // Horizontal resolution for ILI9488
-static short vres = 320; // Vertical resolution for ILI9488
+static short hres = 320; // Horizontal resolution for ILI9488
+static short vres = 480; // Vertical resolution for ILI9488
 static char s_height;
 static char s_width;
 int lcd_char_pos = 0;
@@ -570,8 +570,8 @@ void pico_lcd_init() {
 #ifdef ILI9488
     reset_controller();
 
-    hres = 480;
-    vres = 320;
+    hres = 320;
+    vres = 480;
 
     spi_write_command(0x28);
     spi_write_command(0xE0); // Positive Gamma Control
