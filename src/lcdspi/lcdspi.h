@@ -17,7 +17,7 @@
 #define ILI9488  1
 #ifdef ILI9488
 #define LCD_WIDTH 320
-#define LCD_HEIGHT 320
+#define LCD_HEIGHT 480
 #endif
 
 #define PIXFMT_BGR 1
