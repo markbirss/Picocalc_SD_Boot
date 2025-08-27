@@ -39,7 +39,7 @@ extern bool fs_init(void);
 
 // UI Layout Constants
 #define UI_WIDTH 280
-#define UI_HEIGHT 280
+#define UI_HEIGHT 460
 #define UI_X 20 // Offset from top-left
 #define UI_Y 20
 #define HEADER_TITLE_HEIGHT 20 // Height for the title header
