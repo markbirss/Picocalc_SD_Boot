@@ -1,5 +1,40 @@
 # Picocalc_SD_Boot 
 
+
+Modified for ILI9488
+
+```
+[here]
+    mkdir -p ~/pico
+    cd ~/pico
+    git clone https://github.com/raspberrypi/pico-sdk.git
+    cd pico-sdk
+    git submodule update --init
+
+export PICO_SDK_PATH="~/pico/pico-sdk"
+
+cd ../  
+    
+git clone https://github.com/markbirss/Picocalc_SD_Boot.git
+cd Picocalc_SD_Boot
+git submodule update --init --recursive
+
+cd ./src
+
+mkdir build; cd build
+cmake \
+    -DPICO_BOARD=pico2 \
+    -DPICO_PLATFORM=rp2350-arm-s \
+    ..  
+make    
+sudo cp picocalc_sd_boot_pico2_w.uf2 /media/user/RP2350/
+ 
+[start compile again]
+cd ..
+rm -fr build
+
+```
+
 `Picocalc_SD_Boot` is a custom bootloader for the Raspberry Pi Pico. This bootloader provides the functionality to load and execute applications from an SD card, designed to enable PicoCalc to load firmware to the Pico using an SD card easily.
 
 <div align="center">
